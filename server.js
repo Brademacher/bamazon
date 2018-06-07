@@ -29,7 +29,7 @@ function start() {
         .prompt([{
             name: "itemSelect",
             type: "input",
-            message: "\nWhich item would you like to purchase?",
+            message: "Which item would you like to purchase?\n",
         },
         {
             name: "quantity",
@@ -95,10 +95,9 @@ function update(res, amount) {
 
 // Function to log all necessary data from database
 function queryAllItems() {
-    console.log("Here are the items available for purchase");
     connection.query("SELECT * FROM items", function (err, res) {
         for (var i = 0; i < res.length; i++) {
-            console.log("\nItem " + res[i].id + " | " + res[i].product_name + " | " + "$" + res[i].price);
+            console.log("Item " + res[i].id + " | " + res[i].product_name + " | " + "$" + res[i].price);
         }
         console.log("-----------------------------------");
     });

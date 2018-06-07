@@ -49,6 +49,7 @@ function start() {
                 newItem();
             }
         });
+
     // Function to log all necessary data from database
     function inventory() {
         connection.query("SELECT * FROM items", function (err, res) {
@@ -93,20 +94,20 @@ function start() {
                 name: "quantity",
                 message: "How many do we have?"
             }
-        ]).then(function (res) {
+        ]).then(function (response) {
             createProduct(response.name, response.department, response.price, response.quantity);
         })
     };
-    function createProduct(name, department, price, quantity) {
+    function createProduct(response) {
         console.log("We're adding " + name + " to our inventory!");
 
         var query = connection.query(
             "INSERT INTO items SET ?",
             {
-                name: product_name,
-                department: department,
-                price: price,
-                quantity: count_remaining
+                product_name: response.name,
+                department: response.department,
+                price: response.price,
+                quantity: response.count_remaining
             },
             function (err, res) {
                 console.log(res.affectedRows = " successfully added!")
